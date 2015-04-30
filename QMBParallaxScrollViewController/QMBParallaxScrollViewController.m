@@ -44,7 +44,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
+    // Do any additional setup after loading the view.
 }
 
 - (void)dealloc{
@@ -90,6 +90,9 @@
     _foregroundScrollView.delegate = self;
     [_foregroundScrollView setAlwaysBounceVertical:YES];
     _foregroundScrollView.frame = self.view.frame;
+    
+    NSLog(@"F:%@",NSStringFromCGRect(self.view.frame));
+    
     _foregroundScrollView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     [_foregroundScrollView addSubview:_foregroundView];
     
@@ -171,6 +174,8 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     
+    NSLog(@"%s",__PRETTY_FUNCTION__);
+    
     [self updateContentOffset];
     if ([self.scrollViewDelegate respondsToSelector:_cmd]) {
         [self.scrollViewDelegate scrollViewDidScroll:scrollView];
@@ -178,6 +183,9 @@
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+    
+    NSLog(@"%s",__PRETTY_FUNCTION__);
+    
     if (!_isAnimating && self.foregroundScrollView.contentOffset.y-_startTopHeight > -_maxHeightBorder && self.state == QMBParallaxStateFullSize){
         [self.foregroundScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
     }
@@ -187,10 +195,14 @@
 #pragma mark - Public Interface
 
 - (UIScrollView *)parallaxScrollView {
+    
     return self.foregroundScrollView;
 }
 
 - (void)setBackgroundHeight:(CGFloat)backgroundHeight {
+    
+    NSLog(@"%s",__PRETTY_FUNCTION__);
+    
     _topHeight = backgroundHeight;
     
     [self updateForegroundFrame];
@@ -199,8 +211,6 @@
 
 
 #pragma mark - Internal Methods
-
-
 
 - (CGRect)frameForObject:(id)frameObject {
     return frameObject == [NSNull null] ? CGRectNull : [frameObject CGRectValue];
@@ -219,13 +229,19 @@
         
         self.foregroundScrollView.contentSize = size;
     }else {
-        self.foregroundView.frame = CGRectMake(0.0f,
-                                               _topHeight,
-                                               self.foregroundView.frame.size.width,
-                                               self.foregroundView.frame.size.height);
-        self.foregroundScrollView.contentSize =
-        CGSizeMake(self.view.frame.size.width,
-                   self.foregroundView.frame.size.height + _topHeight);
+        
+        
+        UIScrollView *tableView = [self.bottomViewController scrollViewForParallaxController];
+        CGFloat totalTableHeight = tableView.contentSize.height;
+        
+        self.foregroundView.frame = CGRectMake(0.0f, _topHeight,self.foregroundView.frame.size.width,totalTableHeight);
+        self.foregroundScrollView.contentSize = CGSizeMake(self.view.frame.size.width, totalTableHeight + _topHeight);
+        
+        //TODO: self.foregroundView.frame.size.height ha de ser l'alçada del tableview, de tots els rows junts
+        /*
+         self.foregroundView.frame = CGRectMake(0.0f, _topHeight,self.foregroundView.frame.size.width,self.foregroundView.frame.size.height);
+         self.foregroundScrollView.contentSize = CGSizeMake(self.view.frame.size.width, self.foregroundView.frame.size.height + _topHeight);
+         */
     }
     
 }
@@ -259,24 +275,24 @@
         }
     }
     
-    self.backgroundView.frame = CGRectMake(0.0f,0.0f,self.view.frame.size.width,_topHeight+(-1)*currentOffset);
+    self.backgroundView.frame = CGRectMake(0.0f, 0.0f, self.view.frame.size.width, _topHeight+(-1)*currentOffset);
     
     [self.backgroundView layoutIfNeeded];
-
+    
     
     if (_isAnimating){
         return;
     }
     
-//    if (!_isAnimating && self.lastGesture == QMBParallaxGestureScrollsDown && self.foregroundScrollView.contentOffset.y-_startTopHeight < -_maxHeightBorder && self.state != QMBParallaxStateFullSize){
-//        [self showFullTopView:YES];
-//        return;
-//    }
-//    
-//    if (!_isAnimating && self.lastGesture == QMBParallaxGestureScrollsUp && -_foregroundView.frame.origin.y + self.foregroundScrollView.contentOffset.y > -_minHeightBorder && self.state == QMBParallaxStateFullSize){
-//        [self showFullTopView:NO];
-//        return;
-//    }
+    //    if (!_isAnimating && self.lastGesture == QMBParallaxGestureScrollsDown && self.foregroundScrollView.contentOffset.y-_startTopHeight < -_maxHeightBorder && self.state != QMBParallaxStateFullSize){
+    //        [self showFullTopView:YES];
+    //        return;
+    //    }
+    //
+    //    if (!_isAnimating && self.lastGesture == QMBParallaxGestureScrollsUp && -_foregroundView.frame.origin.y + self.foregroundScrollView.contentOffset.y > -_minHeightBorder && self.state == QMBParallaxStateFullSize){
+    //        [self showFullTopView:NO];
+    //        return;
+    //    }
     
     
 }

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="13A603" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="kNe-aI-dB1">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D131" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="kNe-aI-dB1">
     <dependencies>
-        <deployment defaultVersion="1536" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
     </dependencies>
     <scenes>
         <!--Navigation Controller-->
@@ -22,7 +22,7 @@
             </objects>
             <point key="canvasLocation" x="-441" y="-94"/>
         </scene>
-        <!--View Controller - Parallax Sample-->
+        <!--Parallax Sample-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
                 <viewController id="vXZ-lx-hvc" customClass="ViewController" sceneMemberID="viewController">
@@ -49,6 +49,7 @@
                     <nil key="simulatedTopBarMetrics"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="320" height="200"/>
                     <connections>
                         <outlet property="imageView" destination="FX3-Qr-sRy" id="8ja-W8-3v8"/>
                     </connections>
@@ -57,7 +58,7 @@
             </objects>
             <point key="canvasLocation" x="426" y="-150"/>
         </scene>
-        <!--Parallax Photo View Controller - Sample Image Browser-->
+        <!--Sample Image Browser-->
         <scene sceneID="1o2-IH-r53">
             <objects>
                 <viewController id="bGI-0R-JmJ" customClass="ParallaxPhotoViewController" sceneMemberID="viewController">
@@ -79,7 +80,7 @@
             </objects>
             <point key="canvasLocation" x="1705" y="-150"/>
         </scene>
-        <!--Parallax Map View Controller - Map View Sample-->
+        <!--Map View Sample-->
         <scene sceneID="1ii-eB-8tl">
             <objects>
                 <viewController id="0Fy-b6-Tpq" customClass="ParallaxMapViewController" sceneMemberID="viewController">
@@ -115,6 +116,7 @@
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="320" height="300"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JyD-1f-ECw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -146,6 +148,7 @@
                     <nil key="simulatedStatusBarMetrics"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="320" height="300"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UeD-bm-wWi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -190,7 +193,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="640-UT-ztV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="576" y="154"/>
+            <point key="canvasLocation" x="198" y="290"/>
         </scene>
         <!--Sample Scroll View Controller-->
         <scene sceneID="qqM-fY-i48">

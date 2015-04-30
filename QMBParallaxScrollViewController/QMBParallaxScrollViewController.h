@@ -57,7 +57,7 @@ typedef NS_ENUM(NSUInteger, QMBParallaxGesture) {
 @property (nonatomic, strong) id<QMBParallaxScrollViewControllerDelegate> delegate;
 
 @property (nonatomic, strong, readonly) UIViewController * topViewController;
-@property (nonatomic, strong, readonly) UIViewController * bottomViewController;
+@property (nonatomic, strong, readonly) UIViewController <QMBParallaxScrollViewHolder>* bottomViewController;
 
 @property (nonatomic, assign) CGFloat minHeight;
 @property (nonatomic, assign, readonly) CGFloat topHeight;
