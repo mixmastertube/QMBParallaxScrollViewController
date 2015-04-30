@@ -131,7 +131,7 @@
     [self.topViewGestureRecognizer setNumberOfTapsRequired:1];
     [self.topViewController.view setUserInteractionEnabled:YES];
     
-    [self enableTapGestureTopView:YES];
+    [self enableTapGestureTopView:NO];
 }
 
 - (void)enableTapGestureTopView:(BOOL)enable{
@@ -211,7 +211,7 @@
 
 - (void)updateForegroundFrame {
     
-    
+    NSLog(@"%s",__PRETTY_FUNCTION__);
     
     if ([_foregroundView isKindOfClass:[UIScrollView class]]){
         _foregroundView.frame = CGRectMake(0.0f, _topHeight, self.view.frame.size.width, MAX(((UIScrollView *)_foregroundView).contentSize.height,_foregroundView.frame.size.height));
@@ -232,6 +232,8 @@
 
 - (void)updateContentOffset {
     
+    NSLog(@"%s",__PRETTY_FUNCTION__);
+    
     if (2*self.foregroundScrollView.contentOffset.y>_foregroundView.frame.origin.y){
         [self.foregroundScrollView setShowsVerticalScrollIndicator:YES];
     }else {
@@ -246,8 +248,14 @@
     }
     _lastOffsetY = self.foregroundScrollView.contentOffset.y;
     
-    self.backgroundView.frame =
-    CGRectMake(0.0f,0.0f,self.view.frame.size.width,_topHeight+(-1)*self.foregroundScrollView.contentOffset.y);
+    
+    CGFloat maxOffset = self.minHeight;
+    CGFloat currentOffset = self.foregroundScrollView.contentOffset.y;
+    if (self.foregroundScrollView.contentOffset.y > maxOffset){
+        currentOffset = maxOffset;
+    }
+    
+    self.backgroundView.frame = CGRectMake(0.0f,0.0f,self.view.frame.size.width,_topHeight+(-1)*currentOffset);
     
     [self.backgroundView layoutIfNeeded];
 
@@ -256,20 +264,22 @@
         return;
     }
     
-    if (!_isAnimating && self.lastGesture == QMBParallaxGestureScrollsDown && self.foregroundScrollView.contentOffset.y-_startTopHeight < -_maxHeightBorder && self.state != QMBParallaxStateFullSize){
-        [self showFullTopView:YES];
-        return;
-    }
-    
-    if (!_isAnimating && self.lastGesture == QMBParallaxGestureScrollsUp && -_foregroundView.frame.origin.y + self.foregroundScrollView.contentOffset.y > -_minHeightBorder && self.state == QMBParallaxStateFullSize){
-        [self showFullTopView:NO];
-        return;
-    }
+//    if (!_isAnimating && self.lastGesture == QMBParallaxGestureScrollsDown && self.foregroundScrollView.contentOffset.y-_startTopHeight < -_maxHeightBorder && self.state != QMBParallaxStateFullSize){
+//        [self showFullTopView:YES];
+//        return;
+//    }
+//    
+//    if (!_isAnimating && self.lastGesture == QMBParallaxGestureScrollsUp && -_foregroundView.frame.origin.y + self.foregroundScrollView.contentOffset.y > -_minHeightBorder && self.state == QMBParallaxStateFullSize){
+//        [self showFullTopView:NO];
+//        return;
+//    }
     
     
 }
 
 - (void) showFullTopView:(BOOL)show {
+    
+    NSLog(@"%s",__PRETTY_FUNCTION__);
     
     _isAnimating = YES;
     [self.foregroundScrollView setScrollEnabled:NO];
@@ -302,6 +312,8 @@
 
 
 - (void) changeTopHeight:(CGFloat) height{
+    
+    NSLog(@"%s",__PRETTY_FUNCTION__);
     
     _topHeight = height;
     
