@@ -248,11 +248,15 @@
     }
     _lastOffsetY = self.foregroundScrollView.contentOffset.y;
     
-    
-    CGFloat maxOffset = self.minHeight;
+    NSLog(@"offset:%f",self.foregroundScrollView.contentOffset.y);
     CGFloat currentOffset = self.foregroundScrollView.contentOffset.y;
-    if (self.foregroundScrollView.contentOffset.y > maxOffset){
-        currentOffset = maxOffset;
+    
+    if (self.minHeight > 0){
+        CGFloat maxOffset = self.minHeight;
+        
+        if (self.foregroundScrollView.contentOffset.y > maxOffset){
+            currentOffset = maxOffset;
+        }
     }
     
     self.backgroundView.frame = CGRectMake(0.0f,0.0f,self.view.frame.size.width,_topHeight+(-1)*currentOffset);
