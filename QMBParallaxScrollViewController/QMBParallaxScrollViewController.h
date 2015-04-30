@@ -59,7 +59,7 @@ typedef NS_ENUM(NSUInteger, QMBParallaxGesture) {
 @property (nonatomic, strong, readonly) UIViewController * topViewController;
 @property (nonatomic, strong, readonly) UIViewController * bottomViewController;
 
-@property (nonatomic, assign, readonly) CGFloat minHeight;
+@property (nonatomic, assign) CGFloat minHeight;
 @property (nonatomic, assign, readonly) CGFloat topHeight;
 @property (nonatomic, assign, setter = setMaxHeight:) CGFloat maxHeight;
 
